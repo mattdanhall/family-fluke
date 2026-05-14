@@ -1,35 +1,73 @@
 const questions = [
   {
-    question: "What is Luke's favourite food?",
+    question: "Name a famous Luke",
+    persona: "general public",
     answers: [
-      { text: "Pizza", points: 40 },
-      { text: "Roast dinner", points: 25 },
-      { text: "Chips", points: 15 },
-      { text: "Curry", points: 10 },
-      { text: "Chocolate", points: 7 },
-      { text: "Cereal", points: 3 },
+      { text: "Skywalker", points: 47},
+      { text: "The Evangelist", points: 29},
+      { text: "Littler", points: 17},
+      { text: "Cool Hand", points: 6},
+      { text: "Hall", points: 1},
     ]
   },
   {
-    question: "Name something Luke always loses.",
+    question: "Name something an e-sports athlete might eat/drink",
+    persona: "fitness enthusiasts",
     answers: [
-      { text: "His keys", points: 35 },
-      { text: "His phone", points: 25 },
-      { text: "His temper", points: 18 },
-      { text: "Socks", points: 12 },
-      { text: "The remote", points: 7 },
-      { text: "Board games", points: 3 },
+      { text: "Energy drinks", points: 32},
+      { text: "Crisps (Doritos)", points: 24},
+      { text: "Pizza", points: 18},
+      { text: "Fizzy drinks", points: 14},
+      { text: "Protein shake", points: 7},
+      { text: "Water", points: 5},
     ]
   },
   {
-    question: "What would Luke take to a desert island?",
+    question: "Name a swimming pool inflatable",
+    persona: "general public",
     answers: [
-      { text: "His phone", points: 38 },
-      { text: "Sunscreen", points: 22 },
-      { text: "A football", points: 16 },
-      { text: "Snacks", points: 12 },
-      { text: "A pillow", points: 8 },
-      { text: "His dog", points: 4 },
+      { text: "Flamingo", points: 32},
+      { text: "Rubber ring", points: 25},
+      { text: "Lilo", points: 20},
+      { text: "Swan", points: 12},
+      { text: "Unicorn", points: 8},
+      { text: "Lobster", points: 3},
+    ]
+  },
+  {
+    question: "Name a profession that involves standing on stage and embarrassing yourself",
+    persona: "stand up comedians",
+    answers: [
+      { text: "Stand up comedian", points: 30},
+      { text: "Magician", points: 25},
+      { text: "Pantomime actor", points: 18},
+      { text: "Motivational speaker", points: 14},
+      { text: "Politician", points: 8},
+      { text: "Ventriloquist", points: 5},
+    ]
+  },
+  {
+    question: "Name something you might see at Monkey World",
+    persona: "general public",
+    answers: [
+      { text: "Chimpanzees", points: 35},
+      { text: "Orangutans", points: 25},
+      { text: "Gibbons", points: 15},
+      { text: "Tyre swing", points: 10},
+      { text: "Gift shop", points: 8},
+      { text: "Café", points: 7},
+    ]
+  },
+  {
+    question: "Name something you might get your thumb stuck in",
+    persona: "healthcare professionals",
+    answers: [
+      { text: "Ring", points: 42},
+      { text: "Bottle", points: 23},
+      { text: "Jar", points: 18},
+      { text: "Plughole", points: 10},
+      { text: "Letterbox", points: 6},
+      { text: "Car coin dispenser", points: 1},
     ]
   },
 ];
