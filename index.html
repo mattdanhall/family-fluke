@@ -8,7 +8,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #1a237e;
+    background: #3d2878;
     color: #fff;
     font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
     height: 100vh;
@@ -17,6 +17,38 @@
     overflow: hidden;
     user-select: none;
   }
+
+  /* --- Landing page --- */
+  .landing {
+    position: fixed;
+    inset: 0;
+    background: #3d2878;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .landing iframe {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    pointer-events: none;
+  }
+  .landing-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(61,40,120,0.85);
+    color: #c1c1c1;
+    padding: 0.6rem 1.4rem;
+    border: 2px solid #c1c1c1;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  body.game-started .landing { display: none; }
 
   /* --- Title bar --- */
   .title-bar {
@@ -27,13 +59,13 @@
   .title-bar h1 {
     font-size: 3rem;
     letter-spacing: 0.15em;
-    color: #ffd600;
+    color: #c1c1c1;
     text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
   }
   .title-bar .question {
     font-size: 1.5rem;
     margin-top: 0.5rem;
-    color: #e0e0ff;
+    color: #e8e4f5;
     font-weight: normal;
     min-height: 2em;
   }
@@ -75,19 +107,19 @@
     padding: 0 1.5rem;
   }
   .card-front {
-    background: #283593;
-    border: 3px solid #3949ab;
+    background: #2a1c54;
+    border: 3px solid #c1c1c1;
     justify-content: center;
   }
   .card-front .rank {
     font-size: 2rem;
-    color: #7986cb;
+    color: #c1c1c1;
   }
   .card-back {
-    background: #ffd600;
-    color: #1a237e;
+    background: #c1c1c1;
+    color: #3d2878;
     transform: rotateX(180deg);
-    border: 3px solid #ffab00;
+    border: 3px solid #8a8a8a;
     justify-content: space-between;
   }
   .card-back .rank {
@@ -175,17 +207,17 @@
     transition: border-color 0.3s, background 0.3s;
   }
   .team.active {
-    border-color: #ffd600;
-    background: rgba(255,214,0,0.12);
+    border-color: #c1c1c1;
+    background: rgba(193,193,193,0.15);
   }
   .team-name {
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #b0bec5;
+    color: #8a85a3;
   }
   .team.active .team-name {
-    color: #ffd600;
+    color: #c1c1c1;
   }
   .team-score {
     font-size: 2.8rem;
@@ -197,23 +229,28 @@
   }
   @keyframes score-pulse {
     0%   { transform: scale(1); text-shadow: none; }
-    50%  { transform: scale(1.25); text-shadow: 0 0 20px #ffd600; }
+    50%  { transform: scale(1.25); text-shadow: 0 0 20px #c1c1c1; }
     100% { transform: scale(1); text-shadow: none; }
   }
   .round-info {
     font-size: 1rem;
-    color: #7986cb;
+    color: #8a85a3;
     text-align: center;
   }
   .round-info .round-points {
     font-size: 1.6rem;
-    color: #ffd600;
+    color: #c1c1c1;
     display: block;
     margin-top: 0.2rem;
   }
 </style>
 </head>
 <body>
+
+<div class="landing" id="landing">
+  <iframe src="Familuke Fortunes.pdf#toolbar=0&navpanes=0&scrollbar=0" title="Familuke Fortunes"></iframe>
+  <div class="landing-hint">Click or press any key to begin</div>
+</div>
 
 <div class="title-bar">
   <h1>FAMILUKE FORTUNES</h1>
@@ -247,6 +284,16 @@
 
 <script src="questions.js"></script>
 <script>
+  /* ---- Landing dismissal ---- */
+  const landingEl = document.getElementById("landing");
+  let gameStarted = false;
+  function startGame() {
+    if (gameStarted) return;
+    gameStarted = true;
+    document.body.classList.add("game-started");
+  }
+  landingEl.addEventListener("click", startGame);
+
   /* ---- State ---- */
   let currentQuestion = 0;
   let revealed = [false, false, false, false, false, false];
@@ -412,6 +459,12 @@
   document.addEventListener("keydown", (e) => {
     /* Resume audio context on first interaction (browser autoplay policy) */
     if (audioCtx.state === "suspended") audioCtx.resume();
+
+    if (!gameStarted) {
+      startGame();
+      e.preventDefault();
+      return;
+    }
 
     const key = e.key;
 
